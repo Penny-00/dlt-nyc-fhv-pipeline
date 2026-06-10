@@ -1,0 +1,19 @@
+# Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+
+# DLT state and local build artifacts
+.dlt/config.toml
+.dlt/secrets.toml
+.dlt/data/
+
+# Security Keys & Credentials (ABSOLUTE MUST)
+gcp-key.json
+.gcp/
+*.json
+
+# md files
+plan.md
+implementation.md
+
