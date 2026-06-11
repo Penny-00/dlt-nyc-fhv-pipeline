@@ -95,8 +95,16 @@ def stream_month_rows(task: MonthTask) -> Iterator[list[dict[str, object]]]:
                 for key, value in row.items():
                     if key is None:
                         continue
-                    cleaned_key = key.strip()
-                    
+                    # Force keys to lowercase and strip whitespace to match the DLT schema contract
+                    cleaned_key = key.strip().lower()
+                    # Remap source column names to match schema contract
+                    if cleaned_key == "dropoff_datetime":
+                        cleaned_key = "drop_off_datetime"
+                    elif cleaned_key == "pulocationid":
+                        cleaned_key = "p_ulocation_id"
+                    elif cleaned_key == "dolocationid":
+                        cleaned_key = "d_olocation_id"
+
                     # Clean values: strip whitespace and map empty strings to None (database NULL)
                     if value is not None:
                         cleaned_val = value.strip()
